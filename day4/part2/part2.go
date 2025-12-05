@@ -67,7 +67,7 @@ func process(filename string, outFilename string) int {
 		}
 	}
 
-	fmt.Printf("\n%d rolls of paper are accessible.\n", rolls)
+	fmt.Printf("%d rolls of paper are accessible.\n", rolls)
 	return rolls
 }
 
