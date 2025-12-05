@@ -18,19 +18,19 @@ func newRange(start uint64, end uint64) *Range {
 	return &Range{start: start, end: end}
 }
 
-func (rangeA Range) inside(rangeB Range) bool {
+func (rangeA *Range) inside(rangeB *Range) bool {
 	return rangeA.start >= rangeB.start && rangeA.end <= rangeB.end
 }
 
-func (rangeA Range) endsInside(rangeB Range) bool {
+func (rangeA *Range) endsInside(rangeB *Range) bool {
 	return rangeA.end >= rangeB.start && rangeA.end <= rangeB.end
 }
 
-func (rangeA Range) size() uint64 {
+func (rangeA *Range) size() uint64 {
 	return rangeA.end - rangeA.start + 1
 }
 
-func (rangeA Range) String() string {
+func (rangeA *Range) String() string {
 	return fmt.Sprintf("%d-%d", rangeA.start, rangeA.end)
 }
 
@@ -53,19 +53,19 @@ func reduce(ranges *[]Range) []Range {
 				continue
 			}
 
-			if v.inside(w) {
+			if v.inside(&w) {
 				fmt.Printf("%v can be discarded because it fits into %v\n", v, w)
 				discard = append(discard, i)
 				break
 			}
 
-			if w.inside(v) {
+			if w.inside(&v) {
 				fmt.Printf("%v can be discarded because it fits into %v\n", w, v)
 				discard = append(discard, j)
 				break
 			}
 
-			if v.endsInside(w) || w.endsInside(v) {
+			if v.endsInside(&w) || w.endsInside(&v) {
 				fmt.Printf("%v and %v can be combined into %v\n", v, w, newRange(min(v.start, w.start), max(v.end, w.end)))
 				discard = append(discard, i)
 				discard = append(discard, j)
