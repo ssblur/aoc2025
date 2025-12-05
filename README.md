@@ -3,7 +3,7 @@
 *By Pat Hallbick*
 
 ## Implementation Details
-Written in Go as a portfolio piece.
+Written in Go since I haven't flexed those muscles in a moment.
 
 ## How to run
 Data is located in day roots as input.txt, modules are meant to be run from project root.
