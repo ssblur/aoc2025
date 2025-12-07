@@ -29,22 +29,23 @@ func main() {
 		for i, v := range line {
 			if v == 'S' {
 				beams[i] = 1
-				fmt.Print("      S")
+				fmt.Print("   S")
 			} else if v == '^' && beams[i] > 0 {
 				beams[i-1] += beams[i]
 				beams[i+1] += beams[i]
 				beams[i] = 0
-				fmt.Print("      ^")
+				fmt.Print("   ^")
 			} else {
 				if beams[i] > 0 {
-					if beams[i] >= 100000 {
+					if beams[i] >= 1000 {
 						d := strconv.FormatUint(beams[i], 10)
-						fmt.Printf("%s.%se%.3d ", string(d[0]), string(d[1]), len(d))
+						e := strconv.FormatUint(uint64(len(d)), 10) + "   "
+						fmt.Printf("e%s ", e[0:2])
 					} else {
-						fmt.Printf("%6.d ", beams[i])
+						fmt.Printf("%3.d ", beams[i])
 					}
 				} else {
-					fmt.Print("       ")
+					fmt.Print("    ")
 				}
 			}
 		}
@@ -55,5 +56,5 @@ func main() {
 	for _, i := range beams {
 		timelines += i
 	}
-	fmt.Printf("Split %d times\n", timelines)
+	fmt.Printf("Traversed %d timelines\n", timelines)
 }
